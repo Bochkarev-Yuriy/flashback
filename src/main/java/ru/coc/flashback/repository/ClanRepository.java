@@ -1,7 +1,7 @@
 package ru.coc.flashback.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.coc.flashback.Entity.Clan;
+import ru.coc.flashback.entity.Clan;
 
 /**
  * @author Yuriy Bochkarev

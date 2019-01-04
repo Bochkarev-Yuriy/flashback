@@ -2,7 +2,7 @@ package ru.coc.flashback.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.coc.flashback.Entity.SourceClan;
+import ru.coc.flashback.entity.SourceClan;
 import ru.coc.flashback.repository.SourceClanRepository;
 import ru.coc.flashback.service.SourceClanService;
 

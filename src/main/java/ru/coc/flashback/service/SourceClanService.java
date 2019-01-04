@@ -1,6 +1,6 @@
 package ru.coc.flashback.service;
 
-import ru.coc.flashback.Entity.SourceClan;
+import ru.coc.flashback.entity.SourceClan;
 
 import java.util.List;
 

@@ -3,7 +3,7 @@ package ru.coc.flashback.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import ru.coc.flashback.Entity.Raund;
+import ru.coc.flashback.entity.Raund;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package ru.coc.flashback.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.coc.flashback.Entity.*;
+import ru.coc.flashback.entity.*;
 import ru.coc.flashback.dto.*;
 import ru.coc.flashback.service.RoundService;
 import ru.coc.flashback.service.SeasonDetailService;

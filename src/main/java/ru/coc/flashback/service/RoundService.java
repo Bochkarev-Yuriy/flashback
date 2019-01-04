@@ -1,7 +1,6 @@
 package ru.coc.flashback.service;
 
-import org.springframework.data.repository.query.Param;
-import ru.coc.flashback.Entity.Raund;
+import ru.coc.flashback.entity.Raund;
 
 import java.util.List;
 

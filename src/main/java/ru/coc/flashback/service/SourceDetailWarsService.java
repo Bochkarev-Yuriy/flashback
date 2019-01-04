@@ -1,6 +1,6 @@
 package ru.coc.flashback.service;
 
-import ru.coc.flashback.Entity.SourceDetailWars;
+import ru.coc.flashback.entity.SourceDetailWars;
 
 import java.util.List;
 

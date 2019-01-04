@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.coc.flashback.Entity.Season;
+import ru.coc.flashback.entity.Season;
 import ru.coc.flashback.repository.SeasonRepository;
 import ru.coc.flashback.service.ClashOfClansAPIClientService;
 import ru.coc.flashback.service.SeasonService;

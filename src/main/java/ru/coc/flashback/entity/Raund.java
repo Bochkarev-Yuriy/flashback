@@ -1,4 +1,4 @@
-package ru.coc.flashback.Entity;
+package ru.coc.flashback.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

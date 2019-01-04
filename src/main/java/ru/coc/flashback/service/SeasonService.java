@@ -1,6 +1,6 @@
 package ru.coc.flashback.service;
 
-import ru.coc.flashback.Entity.Season;
+import ru.coc.flashback.entity.Season;
 
 import java.util.List;
 import java.util.Map;

@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.coc.flashback.Entity.Raund;
+import ru.coc.flashback.entity.Raund;
 import ru.coc.flashback.repository.RaundRepository;
 import ru.coc.flashback.service.ClashOfClansAPIClientService;
 import ru.coc.flashback.service.RoundService;
