@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10"/>
+    <link th:replace="fragments/left-panel :: link_css"/>
+    <script th:replace="fragments/left-panel :: script_js"></script>
+
+</head>
+<body>
+	<div th:fragment="header">
+		<nav class="navbar navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" th:href="'#'">Flashback</a>
+				</div>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"></a></li>
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<span th:text="'ЛКВ-Lemberg Pride'"></span>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/season_detail/%238JQ2J2V2/2018-12">2018-12</a></li>
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<span th:text="'ЛКВ-flashback'"></span>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/season_detail/%238P2RCUVR/2018-12">2018-12</a></li>
+						</ul>
+					</li>
+
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+							<span th:text="'ЛКВ-flashfarm'"></span>
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="/season_detail/%239C8LGYQQ/2018-12">2018-12</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="/">
+							<span class="glyphicon glyphicon-home"></span>
+							home
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</body>
+</html>

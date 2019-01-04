@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>403</title>
+    <link th:replace="fragments/left-panel :: link_css"/>
+    <script th:replace="fragments/left-panel :: script_js"></script>
+    <style>
+        .align-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <error404 class="align-center">
+        <div class="b-wrapper">
+            <div class="not-found not-found_no-border">
+                <div class="grid">
+                    <div class="grid__col-6 grid__sd-col-8 grid__t-col-10 grid__p-col-12 grid__col-offset-3 grid__sd-col-offset-2 grid__t-col-offset-1 grid__p-col-offset-0">
+                        <div class="section-box">
+                            <div class="section-box__padding">
+                                <h1 class="not-found__title">403</h1>
+                                <h3 class="not-found__description">Возможно у Вас нет доступа на запрошенную страницу</h3>
+                                <div class="not-found__text">Возможно, вы указали неправильный адрес или страница устарела и была удалена.</div>
+                                <div class="not-found__action">
+                                    <a class="btn" href="/">Перейти на главную страницу</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </error404>
+</div>
+</body>
+</html>

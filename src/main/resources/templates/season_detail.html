@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10"/>
+    <link th:replace="fragments/left-panel::link_css"/>
+    <script th:replace="fragments/left-panel::script_js"></script>
+
+    <style>
+        .align-center {
+            text-align: center;
+        }
+
+        .blue thead {
+            background: #1ABC9C;
+        }
+
+        .fixed {
+            top: 0;
+            position: fixed;
+            width: auto;
+            display: none;
+            border: none;
+        }
+
+        .scrollMore {
+            margin-top: 600px;
+        }
+
+        .up {
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+
+        function test(img) {
+            console.log("Click me: " + img);
+        };
+
+        (function ($) {
+            $.fn.fixMe = function () {
+                return this.each(function () {
+                    var $this = $(this),
+                        $t_fixed;
+
+                    function init() {
+                        $this.wrap('<div class="container" />');
+                        $t_fixed = $this.clone();
+                        $t_fixed.find("tbody").remove().end().addClass("fixed").insertBefore($this);
+                        resizeFixed();
+                    }
+
+                    function resizeFixed() {
+                        $t_fixed.width($this.outerWidth());
+                        $t_fixed.find("th").each(function (index) {
+                            $(this).css("width", $this.find("th").eq(index).outerWidth() + "px");
+                        });
+                    }
+
+                    function scrollFixed() {
+                        var offsetY = $(this).scrollTop(),
+                            offsetX = $(this).scrollLeft(),
+                            tableOffsetTop = $this.offset().top,
+                            tableOffsetBottom = tableOffsetTop + $this.height() - $this.find("thead").height(),
+                            tableOffsetLeft = $this.offset().left;
+                        if (offsetY < tableOffsetTop || offsetY > tableOffsetBottom)
+                            $t_fixed.hide();
+                        else if (offsetY >= tableOffsetTop && offsetY <= tableOffsetBottom && $t_fixed.is(":hidden"))
+                            $t_fixed.show();
+                        $t_fixed.css("left", tableOffsetLeft - offsetX + "px");
+                    }
+
+                    $(window).resize(resizeFixed);
+                    $(window).scroll(scrollFixed);
+                    init();
+                });
+            };
+        })(jQuery);
+
+        $(document).ready(function () {
+            $("table").fixMe();
+            $(".up").click(function () {
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 2000);
+            });
+        });
+
+
+        // $("#exampleModal").on('hidden.bs.modal', function (e) {
+        //     var $this = $(this); var $frame = $this.find('iframe'); $frame.attr("src", $frame.attr("src"));
+        // });
+
+        $(document).ready(function() {
+            $('#youtubeVideo').on('hidden.bs.modal', function() {
+                var $this = $(this).find('iframe'),
+                    tempSrc = $this.attr('src');
+                $this.attr('src', "");
+                $this.attr('src', tempSrc);
+            });
+
+            $('#html5Video').on('hidden.bs.modal', function() {
+                var html5Video = document.getElementById("htmlVideo");
+                if (html5Video != null) {
+                    html5Video.pause();
+                    html5Video.currentTime = 0;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+    <div class="row">
+        <!--<div th:replace="fragments/left-panel :: left-panel"/>-->
+        <div class="col-12">
+            <h1 class="page-header" th:text="'Сезон:  ' + ${seasonDetailsDTO.getSeason()}"></h1>
+            <div class="row">
+                <table class="table table-striped blue" id="header-fixed">
+                    <thead>
+                    <tr class="col-12">
+                        <th class="col align-center">
+                            <b th:text="${seasonDetailsDTO.getDefenderClans().get(0).getAttackerName()}"></b>
+                            <br>
+                            <img width="70" height="70" th:src="${seasonDetailsDTO.getDefenderClans().get(0).getAttackerBadgeUrl()}"
+                                 alt="альтернативный текст">
+                            <br>
+                            <span th:text="'XX-XX'"></span>
+                        </th>
+
+                        <th class="col align-center" th:each="clan : ${seasonDetailsDTO.getDefenderClans()}">
+                            <b th:text="${clan.getDefenderName()}"></b>
+                            <br>
+                            <a th:href="'/season_detail/' + ${clan.getDefenderClanTag()} + '/' + ${seasonDetailsDTO.getSeason()}">
+                                <img width="70" height="70" th:src="${clan.getDefenderBadgeUrl()}" alt="альтернативный текст">
+                            </a>
+                            <br>
+                            <span class="align-center"
+                                  th:text="${clan.getAttackerStars()} + '-' + ${clan.getDefenderStars()}"></span>
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user : ${seasonDetailsDTO.getUsersAttack()}">
+                        <td class="col align-center">
+                            <b><samp
+                                    th:text="${user.getValue().get(user.getValue().keySet().stream().findFirst().get()).get(0).getMapPosition()} + '. ' + ${user.getKey()}">.flashback.</samp></b>
+                            <br>
+                            <img th:src="${user.getValue().get(user.getValue().keySet().stream().findFirst().get()).get(0).getImgUrl()}"
+                                 alt="альтернативный текст">
+                        </td>
+                        <td class="col align-center" th:each="clan : ${seasonDetailsDTO.getDefenderClans()}">
+                            <samp th:text="((${user.getValue().get(clan.getDefenderName())} == null) ? '' : ${user.getValue().get(clan.getDefenderName()).get(0).getDefenders().get(0).getMapPosition()} + '. ' + ${user.getValue().get(clan.getDefenderName()).get(0).getDefenders().get(0).getName()})">Malaysia</samp>
+                            <br>
+                            <img th:type="button" data-toggle="modal" data-target="#youtubeVideo" th:src="((${user.getValue().get(clan.getDefenderName())} == null) ? '' : ${user.getValue().get(clan.getDefenderName()).get(0).getDefenders().get(0).getImgUrl()})">
+                            <br>
+                            <!--th:onclick="'javascript:test(' + ${user.getValue().get(clan.getDefenderName()).get(0).getDefenders().get(0).getId()} + ')'"-->
+                            <img th:src="((${user.getValue().get(clan.getDefenderName())} == null) ? '' : ${user.getValue().get(clan.getDefenderName()).get(0).getDefenders().get(0).getImgUrlStars()})"/>
+                            <br>
+                            <span th:text="((${user.getValue().get(clan.getDefenderName())} == null) ? '' : ${user.getValue().get(clan.getDefenderName()).get(0).getDefenders().get(0).getDestructionPercentage() + '%'})"></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
+    <!--<div class="modal-dialog" role="document">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                    <!--<span aria-hidden="true">&times;</span>-->
+                <!--</button>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+                <!--<iframe width="100%" height="315" src="https://www.youtube.com/embed/nUd9rCN2rzU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!-- Modal -->
+<div class="modal fade" id="youtubeVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">fight</h4>
+            </div>
+            <div class="modal-body">
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/moq_3as3LPI" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

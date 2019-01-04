@@ -1,0 +1,7 @@
+*.iml
+.idea
+*.properties
+json/
+logs/
+target/
+src/test/
