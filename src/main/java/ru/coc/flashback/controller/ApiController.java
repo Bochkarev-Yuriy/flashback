@@ -11,6 +11,8 @@ import ru.coc.flashback.service.DropSourceTableService;
 import ru.coc.flashback.service.SourceClanService;
 import ru.coc.flashback.service.SourceDetailWarsService;
 import ru.coc.flashback.service.impl.LogickService;
+import ru.coc.flashback.service.job.RegistrationAccountJobService;
+import ru.coc.flashback.service.job.UpdateAccountJobService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,6 +39,12 @@ public class ApiController {
 
     @Autowired
     private DropSourceTableService dropSourceTableService;
+
+    @Autowired
+    private RegistrationAccountJobService registrationAccountJobService;
+
+    @Autowired
+    private UpdateAccountJobService updateAccountJobService;
 
     @GetMapping(value = "/synchronize_data_end_war", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ApiOperation(value = "Синхронезировать данные по завершенной войне", nickname = "/synchronize_data_end_war", httpMethod = "GET")
@@ -78,5 +86,21 @@ public class ApiController {
         System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()) + " RestController run drop source tables");
         dropSourceTableService.execute();
         System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()) + " RestController end drop source tables");
+    }
+
+    @GetMapping(value = "/registration_account", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "Регестрировать аккаунты которые находяться в кланах", nickname = "/registration_account", httpMethod = "GET")
+    public void registrationAccount() {
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()) + " RestController run registration account");
+        registrationAccountJobService.execute();
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()) + " RestController end registration account");
+    }
+
+    @GetMapping(value = "/update_account", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ApiOperation(value = "Обновить данные по аккаунтам", nickname = "/update_account", httpMethod = "GET")
+    public void updateAccount() {
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()) + " RestController run update account");
+        updateAccountJobService.execute();
+        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()) + " RestController end update account");
     }
 }

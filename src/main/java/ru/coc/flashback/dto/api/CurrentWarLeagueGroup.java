@@ -1,4 +1,4 @@
-package ru.coc.flashback.api;
+package ru.coc.flashback.dto.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

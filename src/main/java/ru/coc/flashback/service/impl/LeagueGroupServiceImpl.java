@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.coc.flashback.api.CurrentWarLeagueGroup;
+import ru.coc.flashback.dto.api.CurrentWarLeagueGroup;
 import ru.coc.flashback.service.ClashOfClansAPIClientService;
 import ru.coc.flashback.service.LeagueGroupService;
 
@@ -19,8 +19,12 @@ import java.io.IOException;
 @Service
 public class LeagueGroupServiceImpl implements LeagueGroupService {
 
+    private final ClashOfClansAPIClientService clashOfClansAPIClientService;
+
     @Autowired
-    private ClashOfClansAPIClientService clashOfClansAPIClientService;
+    public LeagueGroupServiceImpl(ClashOfClansAPIClientService clashOfClansAPIClientService) {
+        this.clashOfClansAPIClientService = clashOfClansAPIClientService;
+    }
 
     public CurrentWarLeagueGroup getLeagueGroupByClanTag(String clanTag) {
         String getRequest = "https://api.clashofclans.com/v1/clans/" + clanTag.replaceAll("#", "%23") + "/currentwar/leaguegroup";

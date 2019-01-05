@@ -1,11 +1,12 @@
 package ru.coc.flashback.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import ru.coc.flashback.service.job.RegistrationAccountJobService;
+import ru.coc.flashback.service.job.UpdateAccountJobService;
 
 /**
  * @author Yuriy Bochkarev
@@ -15,13 +16,37 @@ import java.util.Date;
 @Component
 public class ScheduledTasks {
 
+    private static Logger logger = LoggerFactory.getLogger(ScheduledTasks.class);
+
+    private final LogickService logickService;
+    private final RegistrationAccountJobService registrationAccountJobService;
+    private final UpdateAccountJobService updateAccountJobService;
+
     @Autowired
-    private LogickService logickService;
+    public ScheduledTasks(LogickService logickService, RegistrationAccountJobService registrationAccountJobService, UpdateAccountJobService updateAccountJobService) {
+        this.logickService = logickService;
+        this.registrationAccountJobService = registrationAccountJobService;
+        this.updateAccountJobService = updateAccountJobService;
+    }
 
     @Scheduled(cron = "${scheduled.api.clashofclans.com.currentwar.leaguegroup}")
     private void reportCurrentTime() {
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()) + " Scheduled run synchronize source clans current war league group");
+        logger.info("Scheduled start: Synchronize source clans current war league group.");
         logickService.execute();
-        System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date()) + " Scheduled end synchronize source clans current war league group");
+        logger.info("Scheduled finish: Synchronize source clans current war league group.");
+    }
+
+    @Scheduled(cron = "${scheduled.registration.account}")
+    private void registrationAccount() {
+        logger.info("Scheduled start: Registration account.");
+        registrationAccountJobService.execute();
+        logger.info("Scheduled finish: Registration account.");
+    }
+
+    @Scheduled(cron = "${scheduled.update.account}")
+    private void updateAccount() {
+        logger.info("Scheduled start: Update account.");
+        updateAccountJobService.execute();
+        logger.info("Scheduled finish: Update account.");
     }
 }

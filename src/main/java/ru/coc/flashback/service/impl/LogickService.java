@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import ru.coc.flashback.entity.*;
-import ru.coc.flashback.api.CurrentWarLeagueGroup;
-import ru.coc.flashback.api.CurrentWarLeagueGroupRounds;
+import ru.coc.flashback.dto.api.CurrentWarLeagueGroup;
+import ru.coc.flashback.dto.api.CurrentWarLeagueGroupRounds;
 import ru.coc.flashback.service.*;
 
 import java.util.*;
